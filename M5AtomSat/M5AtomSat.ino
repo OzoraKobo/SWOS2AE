@@ -10,7 +10,7 @@ bool        timer_1sec_flag = false;    // 1秒タイマーフラグ
 uint32_t    run_time = 0;               // 起動後の経過時間(秒)
 
 // コマンド受信許可タイマー
-#define     TIMER_CMD_RECV_EN   180     // コマンド受信許可タイマー[秒]
+#define     TIMER_CMD_RECV_EN   180     // コマンド受信許可タイマー[秒] 起動からこの時間経過後コマンド受信処理を開始する
 bool        cmd_recv_enable = false;    // コマンド受信許可フラグ
 
 // シリアル受信
@@ -42,7 +42,6 @@ void loop()
     // M5Timer処理
     timer.run();
 
-
     if (timer_1sec_flag == true) {
         // 1秒周期処理
         timer_1sec_flag = false;         // 1秒タイマーフラグクリア
@@ -57,6 +56,28 @@ void loop()
                 serialReceiver.Start();
                 // コマンド受信許可フラグセット
                 cmd_recv_enable = true;
+            }
+        }
+    }
+
+    if (cmd_recv_enable == true) {
+        // コマンド受信許可
+        // シリアル受信メッセージチェック
+        SerialReceive::RESULT   serialRecvResult = serialReceiver.GetReceiveData(seralReceiveBuff);
+        if (serialRecvResult == serialReceiver.RESULT_SUCCESS) {
+            // 受信メッセージ取得成功
+            //Serial.printf("Received : %s\n", seralReceiveBuff);
+            if (strcmp(seralReceiveBuff, "start") == 0) {
+                // "start"コマンド
+                Serial.printf("*** start ***\n");
+            }
+            else if (strcmp(seralReceiveBuff, "stop") == 0) {
+                // "stop"コマンド
+                Serial.printf("*** stop ***\n");
+            }
+            else {
+                // 認識できないコマンド
+                Serial.printf("Invalid command : \"%s\"\n", seralReceiveBuff);
             }
         }
     }

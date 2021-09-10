@@ -40,7 +40,7 @@ void setup()
     // LEDメッセージ表示初期化
     result = ldm.Init(256, ldm_callback);
     // LED表示メッセージ設定
-    result = ldm.SetMsg("LED MATRIX DEMO", ldm.TYPE_SCROLL_1SHOT, 255, 255, 255, 1500);
+    result = ldm.SetMsg("WELCOME TO STARTUP WEEKEND!", ldm.TYPE_SCROLL_CONT, 255, 255, 255, 1500);
     // [DEBUG] プロパティ表示
     ldm.DispProperties();
     // LEDメッセージ表示タスクスタート

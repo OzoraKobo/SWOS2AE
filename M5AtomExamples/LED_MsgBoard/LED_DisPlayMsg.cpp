@@ -105,6 +105,9 @@ LED_DisPlayMsg::RESULT LED_DisPlayMsg::Init(int length, LED_DisplayMsgCallback c
     // コールバック関数へのポインタ
     _callback = callback;
 
+    // LED 横×縦サイズ設定
+    M5.dis.setWidthHeight(LED_MATRIX_COL, LED_MATRIX_ROW);
+ 
     // LEDメッセージ表示プロパティ初期化完了
     init = true;
 
@@ -318,9 +321,9 @@ void LED_DisPlayMsg::run(void *data)
 
 LED_DisPlayMsg::RESULT LED_DisPlayMsg::dispChr(int8_t chr, CRGB _color)
 {
-    uint8_t buffImageData[(25 * 3) + 2];        // LED表示イメージデータバッファ
-    uint8_t *ptrBuffImageData = (uint8_t *)0;   // LED表示イメージデータバッファへのポインタ
-    uint8_t *ptrFontData = (uint8_t *)0;        // フォントデータへのポインタ
+    uint8_t buffImageData[(LED_MATRIX_COL * 3) * LED_MATRIX_ROW + 2];   // LED表示イメージデータバッファ
+    uint8_t *ptrBuffImageData = (uint8_t *)0;                           // LED表示イメージデータバッファへのポインタ
+    uint8_t *ptrFontData = (uint8_t *)0;                                // フォントデータへのポインタ
 
     // キャラクタコードからフォントデータへのポインタを取得する
     if ((chr < FONT5X5_START_CODE) || (FONT5X5_END_CODE < chr)) {
@@ -337,9 +340,9 @@ LED_DisPlayMsg::RESULT LED_DisPlayMsg::dispChr(int8_t chr, CRGB _color)
     *ptrBuffImageData++ = LED_MATRIX_COL;   // Width
     *ptrBuffImageData++ = LED_MATRIX_ROW;   // Hight
 
-    for (int row = 0; row < LED_MATRIX_ROW; row++) {
-        for (int column = 0; column < LED_MATRIX_COL; column++) {
-            int bit = (ptrFontData[row] >> (4 - column)) & 1;
+    for (int column = 0; column < LED_MATRIX_COL; column++) {
+        for (int row = 0; row < LED_MATRIX_ROW; row++) {
+            int bit = (ptrFontData[row] >> (column)) & 1;
             if (bit) {
                 // LED ON
                 *ptrBuffImageData++ = _color.r;
@@ -361,9 +364,9 @@ LED_DisPlayMsg::RESULT LED_DisPlayMsg::dispChr(int8_t chr, CRGB _color)
 
 LED_DisPlayMsg::RESULT LED_DisPlayMsg::scrollChr(int8_t chr, uint16_t col, CRGB _color)
 {
-    uint8_t buffImageData[(25 * 3) + 2];        // LED表示イメージデータバッファ
-    uint8_t *ptrBuffImageData = (uint8_t *)0;   // LED表示イメージデータバッファへのポインタ
-    uint8_t *ptrFontData = (uint8_t *)0;        // フォントデータへのポインタ
+    uint8_t buffImageData[(LED_MATRIX_COL * 3) * LED_MATRIX_ROW + 2];     // LED表示イメージデータバッファ
+    uint8_t *ptrBuffImageData = (uint8_t *)0;                             // LED表示イメージデータバッファへのポインタ
+    uint8_t *ptrFontData = (uint8_t *)0;                                  // フォントデータへのポインタ
 
     // キャラクタコードからフォントデータへのポインタを取得する
     if ((chr < FONT5X5_START_CODE) || (FONT5X5_END_CODE < chr)) {
@@ -415,11 +418,11 @@ LED_DisPlayMsg::RESULT LED_DisPlayMsg::scrollChr(int8_t chr, uint16_t col, CRGB 
     *ptrBuffImageData++ = LED_MATRIX_ROW;   // Hight
 
     // 表示を90度回転させるために行と列を入れ替える
-    for (int row = 0; row < LED_MATRIX_ROW; row++) {
-        for (int column = 0; column < LED_MATRIX_COL; column++) {
-            *ptrBuffImageData++ = matrix[row][column].r;
-            *ptrBuffImageData++ = matrix[row][column].g;
-            *ptrBuffImageData++ = matrix[row][column].b;
+    for (int column = 0; column < LED_MATRIX_COL; column++) {
+        for (int row = 0; row < LED_MATRIX_ROW; row++) {
+            *ptrBuffImageData++ = matrix[row][LED_MATRIX_COL - column - 1].r;
+            *ptrBuffImageData++ = matrix[row][LED_MATRIX_COL - column - 1].g;
+            *ptrBuffImageData++ = matrix[row][LED_MATRIX_COL - column - 1].b;
         }
     }
     M5.dis.displaybuff(buffImageData, 0, 0);
