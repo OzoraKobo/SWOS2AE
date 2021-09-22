@@ -1,3 +1,14 @@
+/******************************************************************************
+ * @file       SerialReceive.h
+ * @brief      シリアル受信 ヘッダファイル
+ * @version    1.00
+ * @author     SONODA Takehiko (OzoraKobo)
+ * @details    シリアル受信のクラス定義
+ * @date       2021/09/09 v1.00 新規作成
+ * @par     
+ * @copyright  Copyright ©︎ 2021 SONODA Takehiko All rights reserved.
+ ******************************************************************************/
+
 #ifndef _SERIAL_RECEIVE_H_
 #define _SERIAL_RECEIVE_H_
 

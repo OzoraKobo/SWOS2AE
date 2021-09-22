@@ -6,7 +6,7 @@
  * @details    LEDマトリクスにASCII文字列を表示する
  * @date       2021/09/09 v1.00 新規作成
  * @date       2021/09/09 v1.01 LED 横×縦サイズ設定追加（M5Atom Library v0.0.5 対応）
- * @date       2021/09/20 v1.01 初期化に LED 横×縦サイズ パラメータ設定機能追加
+ * @date       2021/09/20 v1.02 初期化に LED 横×縦サイズ パラメータ設定機能追加
  * @par     
  * @copyright  Copyright ©︎ 2021 SONODA Takehiko All rights reserved.
  ******************************************************************************/

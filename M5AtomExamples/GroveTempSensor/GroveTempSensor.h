@@ -1,3 +1,14 @@
+/******************************************************************************
+ * @file       GroveTempSensor.h
+ * @brief      Grove温度センサ・温度取得 ヘッダファイル
+ * @version    1.00
+ * @author     SONODA Takehiko (OzoraKobo)
+ * @details    Grove温度センサ・温度取得のヘッダファイル
+ * @date       2021/09/09 v1.00 新規作成
+ * @par     
+ * @copyright  Copyright ©︎ 2021 SONODA Takehiko All rights reserved.
+ ******************************************************************************/
+
 #ifndef _GROVE_TEMP_SENSOR_H_
 #define _GROVE_TEMP_SENSOR_H_
 

@@ -1,3 +1,14 @@
+/******************************************************************************
+ * @file       SerialReceive.cpp
+ * @brief      シリアル受信
+ * @version    1.00
+ * @author     SONODA Takehiko (OzoraKobo)
+ * @details    標準シリアルポートで受信した文字列をバッファに格納し、通知する
+ * @date       2021/09/09 v1.00 新規作成
+ * @par     
+ * @copyright  Copyright ©︎ 2021 SONODA Takehiko All rights reserved.
+ ******************************************************************************/
+
 #include <freertos/FreeRTOS.h>
 #include "SerialReceive.h"
 

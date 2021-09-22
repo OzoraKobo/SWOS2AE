@@ -1,3 +1,14 @@
+/******************************************************************************
+ * @file       GroveTempSensor.cpp
+ * @brief      Grove温度センサ・温度取得
+ * @version    1.00
+ * @author     SONODA Takehiko (OzoraKobo)
+ * @details    Grove温度センサのアナログ出力をAD変換、摂氏温度に変換し、移動平均を求める
+ * @date       2021/09/09 v1.00 新規作成
+ * @par     
+ * @copyright  Copyright ©︎ 2021 SONODA Takehiko All rights reserved.
+ ******************************************************************************/
+
 #include <freertos/FreeRTOS.h>
 #include "GroveTempSensor.h"
 

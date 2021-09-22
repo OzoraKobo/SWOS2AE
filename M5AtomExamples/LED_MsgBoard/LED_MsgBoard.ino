@@ -11,9 +11,8 @@
 #include "M5Atom.h"
 #include "LED_DisPlayMsg.h"
 
-LED_DisPlayMsg  ldm(LED_DisPlayMsg::LOG_DEBUG);     // LEDメッセージ表示クラスインスタンス生成
+LED_DisPlayMsg  ldm(LED_DisPlayMsg::LOG_INFO);     // LEDメッセージ表示クラスインスタンス生成
 
-uint8_t         chrCode = 0x20;
 int             dispCount = 0;                      // 表示カウンタ
 bool            dispDisable = false;                // 表示更新禁止
 int             delayTime = 100;                    // loop毎のディレイ時間(ms)
@@ -40,7 +39,7 @@ void setup()
     // LEDメッセージ表示初期化
     result = ldm.Init(256, ldm_callback);
     // LED表示メッセージ設定
-    result = ldm.SetMsg("WELCOME TO STARTUP WEEKEND!", ldm.TYPE_SCROLL_CONT, 255, 255, 255, 1500);
+    result = ldm.SetMsg("LED MATRIX DEMO", ldm.TYPE_SCROLL_1SHOT, 255, 255, 255, 1500);
     // [DEBUG] プロパティ表示
     ldm.DispProperties();
     // LEDメッセージ表示タスクスタート
